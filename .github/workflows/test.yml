@@ -5,7 +5,6 @@ name: Go-test
 on:
   push:
     branches:
-      - main
       - dev
 
 jobs:
