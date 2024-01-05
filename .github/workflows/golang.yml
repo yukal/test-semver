@@ -40,6 +40,10 @@ jobs:
 
     name: Release
     runs-on: ubuntu-latest
+
+    # Wait for tests
+    needs: test
+
     permissions:
       # to be able to publish a GitHub release
       contents: write
