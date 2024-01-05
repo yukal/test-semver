@@ -2,7 +2,11 @@
 
 name: Go-test
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - dev
 
 jobs:
   test:
