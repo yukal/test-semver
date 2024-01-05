@@ -1,0 +1,87 @@
+# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on: [push]
+# on:
+#   pull_request:
+
+jobs:
+
+  test:
+
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ["1.20"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Display Go version
+        run: go version
+
+      # - name: Build
+      #   run: go build -v ./...
+
+      - name: Benchmark
+        run: go test -bench=. -benchmem ./...
+        # run: go test -bench=. -benchtime=1000x -benchmem ./...
+
+      - name: Test
+        run: go test -cover ./...
+
+  release:
+
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      # to be able to publish a GitHub release
+      contents: write
+
+      # to be able to comment on released issues
+      issues: write
+
+       # to be able to comment on released pull requests
+      pull-requests: write
+
+      # to enable use of OIDC for npm provenance
+      # id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "lts/*"
+
+      # - name: Install dependencies
+      #   run: npm clean-install
+
+      # - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+      #   run: npm audit signatures
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # run: npx semantic-release
+
+      - name: Published Release
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          echo ${{ steps.semantic.outputs.new_release_version }}
+          echo ${{ steps.semantic.outputs.new_release_major_version }}
+          echo ${{ steps.semantic.outputs.new_release_minor_version }}
+          echo ${{ steps.semantic.outputs.new_release_patch_version }}
