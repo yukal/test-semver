@@ -5,13 +5,17 @@
 name: Go-release
 
 on:
-  pull_request:
-    types: [closed]
+  # This one doesn't work
+  # pull_request:
+  #   types: [closed]
+  #   branches:    
+  #     - main
+  push:
     branches:    
       - main
 
 jobs:
-  test:
+  test-wrokflow:
     uses: ./.github/workflows/test.yml
 
   release:
@@ -19,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Wait for tests
-    needs: test
+    needs: test-wrokflow
 
     permissions:
       # to be able to publish a GitHub release
