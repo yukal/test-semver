@@ -6,9 +6,9 @@ on:
       - main
 
 jobs:
-  lint-workflow:
+  lint-job:
     uses: ./.github/workflows/job-lint.yml
 
-  test-workflow:
-    needs: lint-workflow
+  test-job:
+    needs: lint-job
     uses: ./.github/workflows/job-test.yml

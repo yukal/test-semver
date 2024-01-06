@@ -10,12 +10,12 @@ on:
       - main
 
 jobs:
-  test-workflow:
+  test-job:
     uses: ./.github/workflows/job-test.yml
 
   release:
     name: Release
-    needs: test-workflow
+    needs: test-job
     runs-on: ubuntu-latest
 
     permissions:
