@@ -1,12 +1,7 @@
-# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
-
-name: Go-test
+# name: Test
 
 on:
   workflow_call:
-  push:
-    branches:
-      - dev
 
 jobs:
   test:

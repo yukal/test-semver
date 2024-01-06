@@ -1,0 +1,20 @@
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+# https://github.com/marketplace/actions/action-for-semantic-release
+
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-job:
+    name: Test
+    uses: ./.github/workflows/job-test.yml
+
+  release:
+    name: Release
+    needs: test-job
+    uses: ./.github/workflows/job-release.yml

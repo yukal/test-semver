@@ -1,42 +1,18 @@
-# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
-# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
-# https://github.com/marketplace/actions/action-for-semantic-release
-
-name: Go-release
+# name: Release
 
 on:
-  # This one doesn't work
-  # pull_request:
-  #   types: [closed]
-  #   branches:    
-  #     - main
-  push:
-    branches:    
-      - main
+  workflow_call:
 
 jobs:
-  test-wrokflow:
-    uses: ./.github/workflows/test.yml
-
   release:
     name: Release
     runs-on: ubuntu-latest
 
-    # Wait for tests
-    needs: test-wrokflow
-
     permissions:
-      # to be able to publish a GitHub release
-      contents: write
-
-      # to be able to comment on released issues
-      issues: write
-
-       # to be able to comment on released pull requests
-      pull-requests: write
-
-      # to enable use of OIDC for npm provenance
-      # id-token: write
+      contents: write       # to be able to publish a GitHub release
+      issues: write         # to be able to comment on released issues
+      pull-requests: write  # to be able to comment on released pull requests
+      # id-token: write     # to enable use of OIDC for npm provenance
 
     steps:
       - name: Checkout
@@ -57,7 +33,6 @@ jobs:
 
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
-        # Need an `id` for output variables
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

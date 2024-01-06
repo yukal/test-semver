@@ -1,0 +1,20 @@
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+# https://github.com/marketplace/actions/action-for-semantic-release
+
+name: Develop
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  lint-job:
+    name: Lint
+    uses: ./.github/workflows/job-lint.yml
+
+  test-job:
+    name: Test
+    needs: lint-job
+    uses: ./.github/workflows/job-test.yml
