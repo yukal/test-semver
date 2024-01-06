@@ -1,0 +1,13 @@
+name: Develop
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  lint-workflow:
+    uses: ./.github/workflows/lint.yml
+
+  test-workflow:
+    uses: ./.github/workflows/test.yml
