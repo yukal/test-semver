@@ -10,11 +10,11 @@ on:
       - main
 
 jobs:
-  lint-job:
-    name: Lint
+  lint:
+    # name: Lint
     uses: ./.github/workflows/job-lint.yml
 
-  test-job:
-    name: Test
-    needs: lint-job
+  test:
+    # name: Test
+    needs: lint
     uses: ./.github/workflows/job-test.yml

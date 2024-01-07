@@ -10,11 +10,11 @@ on:
       - main
 
 jobs:
-  test-job:
-    name: Test
+  test:
+    # name: Test
     uses: ./.github/workflows/job-test.yml
 
   release:
-    name: Release
-    needs: test-job
+    # name: Release
+    needs: test
     uses: ./.github/workflows/job-release.yml
