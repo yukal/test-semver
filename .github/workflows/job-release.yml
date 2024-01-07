@@ -1,11 +1,11 @@
-# name: Release
+name: Release
 
 on:
   workflow_call:
 
 jobs:
   release:
-    name: Release
+    # name: Release
     runs-on: ubuntu-latest
 
     permissions:
