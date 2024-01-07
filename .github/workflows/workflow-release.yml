@@ -10,9 +10,9 @@ on:
       - main
 
 jobs:
-  test:
-    # name: Test
-    uses: ./.github/workflows/job-test.yml
+  # test:
+  #   # name: Test
+  #   uses: ./.github/workflows/job-test.yml
 
   release:
     # name: Release
@@ -29,6 +29,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - uses: ./.github/workflows/job-test.yml
 
       # - name: Setup Node.js
       #   uses: actions/setup-node@v3
