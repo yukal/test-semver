@@ -10,13 +10,13 @@ on:
       - main
 
 jobs:
-  test:
-    # name: Test
-    uses: ./.github/workflows/job-test.yml
+  # test:
+  #   # name: Test
+  #   uses: ./.github/workflows/job-test.yml
 
   release:
     # name: Release
-    needs: test
+    runs-on: ubuntu-latest
 
     permissions:
       contents: write       # to be able to publish a GitHub release
@@ -24,4 +24,37 @@ jobs:
       pull-requests: write  # to be able to comment on released pull requests
       # id-token: write     # to enable use of OIDC for npm provenance
 
-    uses: ./.github/workflows/job-release.yml
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/workflows/job-test.yml
+
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "lts/*"
+
+      # - name: Install dependencies
+      #   run: npm clean-install
+
+      # - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+      #   run: npm audit signatures
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        id: semantic
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # run: npx semantic-release
+
+      - name: Published Release
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          echo ${{ steps.semantic.outputs.new_release_version }}
+          echo ${{ steps.semantic.outputs.new_release_major_version }}
+          echo ${{ steps.semantic.outputs.new_release_minor_version }}
+          echo ${{ steps.semantic.outputs.new_release_patch_version }}
