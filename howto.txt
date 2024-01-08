@@ -1,0 +1,13 @@
+LINTING
+  https://golangci-lint.run/usage/linters/
+  https://github.com/marketplace/actions/run-golangci-lint
+  https://github.com/golangci/golangci-lint-action
+
+  Check
+    > golangci-lint run
+    > golangci-lint run --enable-all
+
+  Fix linting
+    > go fmt ./...
+    > gofmt -s -w -l .
+    > gofumpt -l -w .
