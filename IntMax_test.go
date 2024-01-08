@@ -14,7 +14,7 @@ func TestIntMaxBasic(t *testing.T) {
 }
 
 func TestIntMaxTableDriven(t *testing.T) {
-	var tests = []struct {
+	tests := []struct {
 		a, b int
 		want int
 	}{
