@@ -1,4 +1,4 @@
-name: release-job
+name: job-release
 
 on:
   workflow_call:

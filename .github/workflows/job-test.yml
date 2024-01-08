@@ -1,6 +1,6 @@
 # https://github.com/actions/setup-go
 
-name: test-job
+name: job-test
 
 on:
   workflow_call:
