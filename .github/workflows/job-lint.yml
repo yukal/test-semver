@@ -1,3 +1,9 @@
+# https://github.com/actions/setup-go
+# 
+# golangci-lint
+# https://github.com/marketplace/actions/run-golangci-lint
+# https://github.com/golangci/golangci-lint-action
+
 name: Lint
 
 on:
