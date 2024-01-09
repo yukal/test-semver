@@ -1,7 +1,29 @@
+SECURITY
+  - https://docs.github.com/en/code-security/dependabot/dependabot-alerts/configuring-dependabot-alerts
+
+VERSIONING
+  - https://semver.org/
+
+RELEASE
+  - https://semantic-release.gitbook.io/semantic-release/
+  - https://semantic-release.gitbook.io/semantic-release/extending/plugins-list
+  - https://github.com/GeekHomeInside/semantic-release-example
+  - https://github.com/semantic-release/semantic-release/discussions
+
+COMMIT
+  - https://github.com/conventional-changelog/commitlint
+  - https://github.com/commitizen/cz-cli
+
+CHANGELOG
+  - https://keepachangelog.com/en/1.1.0/
+  - https://changelog.com/
+  - https://gist.github.com/juampynr/4c18214a8eb554084e21d6e288a18a2c
+  - https://github.com/lob/generate-changelog
+
 LINTING
-  https://golangci-lint.run/usage/linters/
-  https://github.com/marketplace/actions/run-golangci-lint
-  https://github.com/golangci/golangci-lint-action
+  - https://golangci-lint.run/usage/linters/
+  - https://github.com/marketplace/actions/run-golangci-lint
+  - https://github.com/golangci/golangci-lint-action
 
   Check
     > golangci-lint run
